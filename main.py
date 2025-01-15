@@ -9,10 +9,10 @@ def find_common_free_slots_matrix(schedules, days_exam):
     common_free_slots = [[1] * 8 for _ in days_exam]
 
     for timetable in schedules.values():
-        for i, day_idx in enumerate(days_exam):
-            for slot_idx, slot in enumerate(timetable[day_idx]):
+        for i, day in enumerate(days_exam):
+            for j, slot in enumerate(timetable[day]):
                 if slot != 0:
-                    common_free_slots[i][slot_idx] = 0 # ocupado
+                    common_free_slots[i][j] = 0 # ocupado
 
     return common_free_slots
 
@@ -41,7 +41,7 @@ schedules = {
     ],
 }
 
-students_recovery = {
+students_exam = {
     "Aluno1": [1, 2, 3, 5],
     "Aluno2": [2, 6],
     "Aluno3": [2],
@@ -57,7 +57,7 @@ for i, free_slots in enumerate(result):
 
 recovery_disciplines = set() # set nao aceita valores duplicados
 
-for disciplines in students_recovery.values():
+for disciplines in students_exam.values():
     recovery_disciplines.update(disciplines)
 
 recovery_disciplines = sorted(recovery_disciplines)
